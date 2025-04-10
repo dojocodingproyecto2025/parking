@@ -3,15 +3,3 @@ node_modules/
 
 # Entornos
 .env
-
-# Logs
-*.log
-logs/
-npm-debug.log*
-
-# Sistema operativo
-.DS_Store
-
-# IDEs
-.vscode/
-*.swp
