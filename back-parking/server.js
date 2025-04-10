@@ -1,25 +1,29 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import reservationRoutes  from "./src/routers/reservationRoutes.js";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = new express();
+const PORT = process.env.PORT || 8080; 
+
 app.use(express.json());
 app.use(cors());
-dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 
 mongoose
-  .connect(
-    "mongodb+srv://root:123@cluster0.juyjj.mongodb.net/parking?retryWrites=true&w=majority&appName=Cluster0"
-  )
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("Se conecto correctamente a la bd Parking"))
   .catch((e) => console.log("Error", e));
 
   // use-routers
+  app.use('/api/reservation',reservationRoutes);
 
 // http://localhost:8080
-app.listen(process.env.PORT, ()=> {
+app.listen(PORT, ()=> {
   console.log(
-    `El servidor se encuentra activo en el puerto ${PUERTO} Api Parking`
+    `El servidor se encuentra activo en el puerto ${PORT} Api Parking`
   );
-});
+})
