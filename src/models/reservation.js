@@ -5,9 +5,12 @@ import mongoose, {Schema, model} from 'mongoose';
 },*/
 const reservationSchema = new Schema({
 
-  userId: { type: String, required: true },
-  placa: { type: String, required: true },
-  numeroSlot:{ type: Number, required: true },
+  userId: { type: String, required: true }, 
+  placa: { type: String, required: true },     
+  numeroSlot:{ type: Number, required: true },          
 })
 
 export default model('Reservation', reservationSchema);
+
+
+//testing de permisos Julian
