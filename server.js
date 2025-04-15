@@ -1,8 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import dotenv from "dotenv";
 import reservationRoutes  from "./src/routers/reservationRoutes.js";
-import dotenv from 'dotenv';
+import emailRoutes from "./src/routers/emailRoutes.js";
+import userRoutes from "./src/routers/userRoutes.js";
+
 
 dotenv.config();
 
@@ -20,6 +23,8 @@ mongoose
 
   // use-routers
   app.use('/api/reservation',reservationRoutes);
+  app.use('/api/sendMail',emailRoutes);
+  app.use(userRoutes);
 
 // http://localhost:8080
 app.listen(PORT, ()=> {
