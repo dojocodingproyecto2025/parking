@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import reservationRoutes  from "./src/routers/reservationRoutes.js";
 import dotenv from 'dotenv';
+import purcharseRoutes from "./src/routers/purcharseRoutes.js";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ mongoose
 
   // use-routers
   app.use('/api/reservation',reservationRoutes);
+  app.use('/api/purcharse',purcharseRoutes);
 
 // http://localhost:8080
 app.listen(PORT, ()=> {
