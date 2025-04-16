@@ -2,7 +2,12 @@ import * as purcharseService from '../services/purcharseService.js';
 
 export const purcharse = async (req, res, next) => {
     try {
-      const session = await purcharseService.createPurchase();
+      const session = await purcharseService.createPurchase({
+        name: 'Producto de ejemplo',
+        description: 'Descripción del producto de ejemplo',
+        images: ['https://example.com/image.png'],
+        price: 2000,
+      });
       res.status(200).json({ id: session.id }); 
       //res.status(200).json({url: session.url});
     } catch (error) {
@@ -12,7 +17,12 @@ export const purcharse = async (req, res, next) => {
 
   export const getLinkBuy = async (req, res, next) => {
     try {
-      const session = await purcharseService.createPurchase();
+      const session = await purcharseService.createPurchase({
+        name: 'Producto de ejemplo',
+        description: 'Descripción del producto de ejemplo',
+        images: ['https://example.com/image.png'],
+        price: 2000,
+      });
       res.status(200).json({url: session.url});
     } catch (error) {
       next(error);
