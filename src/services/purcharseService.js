@@ -14,7 +14,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY.trim(), {
 
 export const createPurchase = async (productData) => {
   try {
-
+    console.log("servicio -------------------------")
+    console.log(productData)
     if (!productData || !process.env.CLIENT_URL) {
       throw new Error('Datos de producto o CLIENT_URL faltantes');
     }
