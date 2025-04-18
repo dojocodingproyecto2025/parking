@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 import reservationRoutes  from "./src/routers/reservationRoutes.js";
+import purcharseRoutes from "./src/routers/purcharseRoutes.js";
 import emailRoutes from "./src/routers/emailRoutes.js";
 import userRoutes from "./src/routers/userRoutes.js";
 
@@ -23,6 +24,7 @@ mongoose
 
   // use-routers
   app.use('/api/reservation',reservationRoutes);
+  app.use('/api/purcharse',purcharseRoutes);
   app.use('/api/sendMail',emailRoutes);
   app.use(userRoutes);
 
