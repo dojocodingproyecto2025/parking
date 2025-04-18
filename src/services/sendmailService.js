@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+import puppeteer from "puppeteer";
 
 dotenv.config();
 
@@ -22,26 +23,56 @@ const transporter = nodemailer.createTransport({
   });
 
   // Función para compilar la plantilla
-const compileTemplate = (templateName, data) => {
+const compileTemplate = async (templateName, data) => {
   const filePath = path.join(__dirname, "../", "templates", `${templateName}.hbs`);
-  console.log('filePath',filePath);
   const source = fs.readFileSync(filePath, "utf8");
   const template = handlebars.compile(source);
   return template(data);
 };
 
-  export const sendEmail = async (to, data, id) => {
-    const htmlContent = compileTemplate("payment", data);
+const ticketPDF = async (html) => {
+  try {    
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    await page.setContent(html, { waitUntil: "domcontentloaded" });
+
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      printBackground: true,
+    });
+
+    await browser.close();
+
+    return pdfBuffer;
+    
+  } catch (err) {
+    console.error("Error generando PDF:", err);
+    //res.status(500).send("Error generando PDF");
+  }
+}
+
+  export const sendEmail = async (to, data, id) => {    
+    const htmlContent = await compileTemplate("payment", data);    
+    const pdfFile = await ticketPDF(htmlContent);
+    
     const subject = "Recibo de pago de estacionamiento";
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to,
       subject,
-      html: htmlContent
+      html: htmlContent,
+      attachments: [
+        {
+          filename: "Ticket.pdf",
+          content: pdfFile,
+          contentType: "application/pdf",
+        },
+      ],
     };
   
     try {
-      const info = await transporter.sendMail(mailOptions);
+     const info = await transporter.sendMail(mailOptions);
       console.log('Correo enviado:', info.messageId);
       return info;
     } catch (error) {
