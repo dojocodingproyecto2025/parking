@@ -19,7 +19,6 @@ const register = async (req, res) => {
 };
 const login = async (req, res) => {
   var data = req.body;
-  console.log(data);
 
   var userFind = await User.findOne({ email: data.email });
   if (userFind == null) {
