@@ -12,7 +12,7 @@ export const sendmailReservation = async (req, res) => {
 
         const fullname = userFind.name + " " + userFind.lastName
     
-        const pdf = await sendmailService.sendEmail(to, { fullname, producto }, id);
+        await sendmailService.sendEmail(to, { fullname, producto }, id);
         res.status(201).json({ status: "ok" });
     } catch (error) {
         res.status(500).json({ error: 'Error al enviar el correo' });

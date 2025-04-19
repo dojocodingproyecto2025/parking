@@ -1,24 +1,26 @@
-// export const validateUser = (req, res, next) => {
-//     const { email, placa, numeroSlot } = req.body;
-//     const errors = [];
+export const validateUser = (req, res, next) => {
+    const { email, password, name, lastName } = req.body;
+    const errors = [];
 
-//     if (!userId) {
-//         errors.push("usuario es requerida");
-//     }
+    if (!email) {
+        errors.push("Correo es requerida");
+    }
 
-//     if (!placa) {
-//         errors.push("placa es requerida");
-//     } 
-
-//     if (!numeroSlot) {
-//         errors.push("numero de slot es requerida");
-//     } else if (isNaN(numeroSlot)) {
-//         errors.push("numeroSlot debe ser un número");
-//     }
-
-//     if (errors.length > 0) {
-//         return res.status(400).json({ errors });
-//       }
+    if (!password) {
+        errors.push("Contraseña es requerida");
+    }
     
-//       next();
-// }
+    if (!name) {
+        errors.push("Nombre es requerido");
+    }
+
+    if (!lastName) {
+        errors.push("Apellido es requerido");
+    }
+
+    if (errors.length > 0) {
+        return res.status(400).json({ errors });
+    }
+
+    next();
+}
