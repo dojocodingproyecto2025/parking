@@ -5,9 +5,12 @@
   <title>Bienvenido</title>
 </head>
 <body>
-  <h2>Hola {{name}} 👋</h2>
-  <p>Gracias por registrarte en nuestro sistema 🚀</p><br>
-  <p>Ya estamos enviando correo con Template</p>
-  <p>Ya estamos enviando correo con archivo pdf adjunto</p>
+  <h2>Hola {{fullname}} 👋</h2>
+  <p>Gracias por reservar en nuestro sistema 🚀</p><br>
+  <p>Su lugar de estacionamiento ya esta reservado</p><br><br>
+  <p>Datos de su reservación</p>
+  <p>Espacio de estacionamiento: {{producto.nSlot}}</p>
+  <p>Precio: ${{producto.precio}}</p>
+  <p>Se adjunta comprobante de su compra en el correo</p>
 </body>
 </html>

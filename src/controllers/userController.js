@@ -22,7 +22,6 @@ const login = async (req, res) => {
   console.log(data);
 
   var userFind = await User.findOne({ email: data.email });
-  console.log(userFind);
   if (userFind == null) {
     return res.status(201).json({ exist: false });
   }
