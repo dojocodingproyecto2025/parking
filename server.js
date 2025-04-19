@@ -7,7 +7,6 @@ import purcharseRoutes from "./src/routers/purcharseRoutes.js";
 import emailRoutes from "./src/routers/emailRoutes.js";
 import userRoutes from "./src/routers/userRoutes.js";
 
-
 dotenv.config();
 
 const app = new express();
