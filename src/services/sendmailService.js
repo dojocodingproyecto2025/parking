@@ -7,7 +7,8 @@ import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-import puppeteer from "puppeteer";
+// import puppeteer from "puppeteer";
+import chromium from 'chrome-aws-lambda';
 
 dotenv.config();
 
@@ -31,26 +32,49 @@ const compileTemplate = async (templateName, data) => {
 };
 
 const ticketPDF = async (html) => {
-  try {    
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
+  try {
+    const browser = await chromium.puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless,
+    });
 
-    await page.setContent(html, { waitUntil: "domcontentloaded" });
+    const page = await browser.newPage();
+    await page.setContent(html, { waitUntil: 'domcontentloaded' });
 
     const pdfBuffer = await page.pdf({
-      format: "A4",
+      format: 'A4',
       printBackground: true,
     });
 
     await browser.close();
-
     return pdfBuffer;
-    
   } catch (err) {
-    console.error("Error generando PDF:", err);
-    //res.status(500).send("Error generando PDF");
+    console.error('Error generando PDF:', err);
+    throw err;
   }
-}
+};
+// const ticketPDF = async (html) => {
+//   try {    
+//     const browser = await puppeteer.launch();
+//     const page = await browser.newPage();
+
+//     await page.setContent(html, { waitUntil: "domcontentloaded" });
+
+//     const pdfBuffer = await page.pdf({
+//       format: "A4",
+//       printBackground: true,
+//     });
+
+//     await browser.close();
+
+//     return pdfBuffer;
+    
+//   } catch (err) {
+//     console.error("Error generando PDF:", err);
+//     //res.status(500).send("Error generando PDF");
+//   }
+// }
 
   export const sendEmail = async (to, data, id) => {    
     const htmlContent = await compileTemplate("payment", data);    
