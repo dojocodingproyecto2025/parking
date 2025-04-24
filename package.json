@@ -19,11 +19,12 @@
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.1",
+    "html-to-text": "^9.0.5",
     "jsonwebtoken": "^9.0.2",
+    "jspdf": "^3.0.1",
     "mongoose": "^8.13.2",
     "nodemailer": "^6.10.0",
     "pdfkit": "^0.17.0",
-    "puppeteer": "^24.7.1",
     "socket.io": "^4.8.1",
     "stripe": "^18.0.0"
   },
