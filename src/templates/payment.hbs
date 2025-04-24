@@ -3,14 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <title>Bienvenido</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+      padding: 40px 20px;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+
+    h2 {
+      color: #2c3e50;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      font-weight: bold;
+      color: #1a73e8;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
-  <h2>Hola {{fullname}} 👋</h2>
-  <p>Gracias por reservar en nuestro sistema 🚀</p><br>
-  <p>Su lugar de estacionamiento ya esta reservado</p><br><br>
-  <p>Datos de su reservación</p>
-  <p>Espacio de estacionamiento: {{producto.nSlot}}</p>
-  <p>Precio: ${{producto.precio}}</p>
-  <p>Se adjunta comprobante de su compra en el correo</p>
+  <div class="container">
+    <h2>Hola {{fullname}} 👋</h2>
+    <p>Gracias por reservar en nuestro sistema 🚗</p>
+    <p>Tu lugar de estacionamiento ya está reservado.</p>
+
+    <hr>
+
+    <p><strong>Datos de tu reservación:</strong></p>
+    <p><span class="highlight">Espacio de estacionamiento:</span> {{producto.nSlot}}</p>
+    <p><span class="highlight">Precio:</span> ${{producto.precio}}</p>
+
+    <p>📩 Se ha adjuntado el comprobante de tu compra en este correo.</p>
+
+    <div class="footer">
+      Gracias por confiar en nosotros. ¡Buen viaje!
+    </div>
+  </div>
 </body>
 </html>

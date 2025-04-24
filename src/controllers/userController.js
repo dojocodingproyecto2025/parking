@@ -36,7 +36,7 @@ const login = async (req, res) => {
     lastName: userFind.lastName,
   };
 
-  var jwtValue = jwt.sign(userData, "dojoFiKey", { expiresIn: "1m" });
+  var jwtValue = jwt.sign(userData, "dojoFiKey", { expiresIn: "10m" });
 
   res.status(201).json({ exist: true, jwt: jwtValue });
 };
