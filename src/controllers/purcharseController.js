@@ -1,17 +1,17 @@
 import * as purcharseService from '../services/purcharseService.js';    
 
 export const purcharse = async (req, res, next) => {
-  try {
-    // req.productData ya está validado por el middleware
+  try {    
     const session = await purcharseService.createPurchase(req.productData);
     
-    res.status(200).json({
+    /*res.status(200).json({
       success: true,
       session_id: session.id,
       payment_url: session.url,
       amount: session.amount,
       currency: "USD"
-    });
+    });*/
+    res.json({ id: session.id });
     
   } catch (error) {
     console.error('Error en purcharse:', error);

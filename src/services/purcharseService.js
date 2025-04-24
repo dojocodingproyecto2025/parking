@@ -14,12 +14,10 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY.trim(), {
 
 export const createPurchase = async (productData) => {
   try {
-    console.log("servicio -------------------------")
-    console.log(productData)
     if (!productData || !process.env.CLIENT_URL) {
       throw new Error('Datos de producto o CLIENT_URL faltantes');
     }
-
+    const returnData = `${productData.placa}|${parseInt(productData.name.substring(1))}`;
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
@@ -37,7 +35,7 @@ export const createPurchase = async (productData) => {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.CLIENT_URL}success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url:`${process.env.CLIENT_URL}success?data=${returnData}`,
       cancel_url: `${process.env.CLIENT_URL}canceled`,
       metadata: {
         product_id: productData.id || '',
