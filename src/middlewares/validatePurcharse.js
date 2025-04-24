@@ -17,6 +17,7 @@ export const validateProductData = (req, res, next) => {
     quantity: Math.max(1, Math.floor(Number(req.body.quantity)) || 1),
     description: req.body.description || "",
     images: req.body.images || [],
+    placa: req.body.placa || null,
     id: req.body.id || null,
     email: req.body.email || null
   };
