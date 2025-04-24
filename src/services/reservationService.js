@@ -33,14 +33,25 @@ export const getReservations = async () => {
     const reservations = await Reservation.find({});
     
     const spots = Array.from({ length: 19 }, (_, i) => {
-      const spotNumber = `A${i + 1}`;      
+      const spotNumber = `A${i + 1}`;
       const reservation = reservations.find(r => r.numeroSlot === i + 1);
 
+      if (reservation) {
+        return {
+          _id: reservation._id.toString(),
+          spotNumber,
+          isOccupied: true,
+          userId: reservation.userId?.toString() || null,
+          placa: reservation.placa || null,
+        };
+      }
+            
       return {
+        _id: null,
         spotNumber,
-        isOccupied: Boolean(reservation),
-        userId: reservation?.userId || null,
-        placa: reservation?.placa || null
+        isOccupied: false,
+        userId: null,
+        placa: null
       };
     });
 

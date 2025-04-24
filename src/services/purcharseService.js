@@ -35,8 +35,8 @@ export const createPurchase = async (productData) => {
         },
       ],
       mode: 'payment',
-      success_url:`${process.env.CLIENT_URL}success?data=${returnData}`,
-      cancel_url: `${process.env.CLIENT_URL}canceled`,
+      success_url:`${process.env.CLIENT_URL}/success?data=${returnData}`,
+      cancel_url: `${process.env.CLIENT_URL}/canceled`,
       metadata: {
         product_id: productData.id || '',
         user_email: productData.email || ''
