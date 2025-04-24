@@ -8,11 +8,6 @@ import { jsPDF } from "jspdf";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-<<<<<<< HEAD
-import puppeteer from "puppeteer";
-import chromium from 'chrome-aws-lambda';
-=======
->>>>>>> 386e74b09016e256819775e10a0fe4273764cdaa
 
 dotenv.config();
 
